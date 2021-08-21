@@ -1,0 +1,14 @@
+name: AdriianhEssentials
+version: '${project.version}'
+main: me.adriianhdev.adriianhessentials.AdriianhEssentials
+api-version: 1.17
+authors: [ AdriianhDev ]
+description: A simple essentials plugin.
+commands:
+  kill:
+    description: Kill yourself or another player.
+    usage: /<command>
+  gamemode:
+    description: Changes the gamemode of a player.
+    usage: /<command>
+    alisases: [gm, mode]
