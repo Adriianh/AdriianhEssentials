@@ -1,0 +1,35 @@
+#######################################
+#    Messages - AdriianhEssentials    #
+#######################################
+
+#Gamemode messages
+gamemode:
+  survival: ""
+  creative: ""
+  adventure: ""
+  spectator: ""
+
+#Fly messages
+fly:
+  messages:
+    activated: "&aFly activated, now you can fly."
+    deactivated: "&cFly deactivated, now you can't fly."
+  titles:
+    activated: "&a&lFLY ACTIVATED"
+    deactivated: "&c&lFLY DEACTIVATED"
+    fadeIn: "500"
+    stay: "3000"
+    fadeOut: "1000"
+  subtitles:
+    activated: "&7Now you can fly."
+    deactivated: "&7Now you can't fly."
+  sounds:
+    sound:
+      activated-id: "ENTITY.EXPERIENCE_ORB.PICKUP"
+      deactivated-id: "BLOCK_ANVIL_BREAK"
+    volume:
+      activated: 1
+      deactivated: 1
+    pitch:
+      activated: 1
+      deactivated: 1
