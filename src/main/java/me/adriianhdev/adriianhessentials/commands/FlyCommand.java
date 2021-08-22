@@ -1,7 +1,6 @@
 package me.adriianhdev.adriianhessentials.commands;
 
 import me.adriianhdev.adriianhessentials.AdriianhEssentials;
-import me.adriianhdev.adriianhessentials.files.FileManager;
 import me.adriianhdev.adriianhessentials.utils.SoundUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
@@ -69,22 +68,22 @@ public class FlyCommand implements CommandExecutor {
     }
 
     private void flyMethod(Player player){
-        deactivatedSound = FileManager.get().getString("sounds.sound.deactivated-id");
-        activatedSound = FileManager.get().getString("sounds.sound.deactivated-id");
-        volume = FileManager.get().getInt("sounds.volume.activated");
-        dvolume = FileManager.get().getInt("sounds.volume.deactivated");
-        pitch = FileManager.get().getInt("sounds.pitch.activated");
-        dpitch = FileManager.get().getInt("sounds.pitch.deactivated");
+        deactivatedSound = plugin.getCustomConfig().getString("sounds.sound.deactivated-id");
+        activatedSound = plugin.getCustomConfig().getString("sounds.sound.deactivated-id");
+        volume = plugin.getCustomConfig().getInt("sounds.volume.activated");
+        dvolume = plugin.getCustomConfig().getInt("sounds.volume.deactivated");
+        pitch = plugin.getCustomConfig().getInt("sounds.pitch.activated");
+        dpitch = plugin.getCustomConfig().getInt("sounds.pitch.deactivated");
 
 
         if(player.hasPermission("adriianhessentials.fly")){
             if(list_of_flying_players.contains(player)){
                 list_of_flying_players.remove(player);
                 player.setAllowFlight(false);
-                player.sendMessage(FileManager.get().getString("fly.messages.deactivated"));
+                player.sendMessage(plugin.getCustomConfig().getString("fly.messages.deactivated"));
                 player.showTitle(Title.title(
-                        Component.text(FileManager.get().getString("fly.title.deactivated")),
-                        Component.text(FileManager.get().getString("fly.subtitle.deactivated")),
+                        Component.text(plugin.getCustomConfig().getString("fly.title.deactivated")),
+                        Component.text(plugin.getCustomConfig().getString("fly.subtitle.deactivated")),
                         Title.Times.of(
                                 Duration.ofMillis(500),
                                 Duration.ofMillis(3000),
@@ -99,14 +98,14 @@ public class FlyCommand implements CommandExecutor {
             }else if(!list_of_flying_players.contains(player)){
                 list_of_flying_players.add(player);
                 player.setAllowFlight(true);
-                player.sendMessage(FileManager.get().getString("fly.messages.activated"));
+                player.sendMessage(plugin.getCustomConfig().getString("fly.messages.activated"));
                 player.showTitle(Title.title(
-                        Component.text(FileManager.get().getString("fly.title.activated")),
-                        Component.text(FileManager.get().getString("fly.subtitle.activated")),
+                        Component.text(plugin.getCustomConfig().getString("fly.title.activated")),
+                        Component.text(plugin.getCustomConfig().getString("fly.subtitle.activated")),
                         Title.Times.of(
-                                Duration.ofMillis(FileManager.get().getInt("fly.title.fadeIn")),
-                                Duration.ofMillis(FileManager.get().getInt("fly.title.stay")),
-                                Duration.ofMillis(FileManager.get().getInt("fly.title.fadeOut"))
+                                Duration.ofMillis(plugin.getCustomConfig().getInt("fly.title.fadeIn")),
+                                Duration.ofMillis(plugin.getCustomConfig().getInt("fly.title.stay")),
+                                Duration.ofMillis(plugin.getCustomConfig().getInt("fly.title.fadeOut"))
                         )
                 ));
                 SoundUtil.playSound(
