@@ -11,4 +11,8 @@ commands:
   gamemode:
     description: Changes the gamemode of a player.
     usage: /<command>
-    alisases: [gm, mode]
+    aliases: [gm, mode]
+  fly:
+    description: Allows you to fly.
+    usage: /<command>
+    aliases: [flight]

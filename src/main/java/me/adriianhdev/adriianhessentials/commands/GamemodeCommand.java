@@ -26,57 +26,65 @@ public class GamemodeCommand implements CommandExecutor{
             Player player = (Player) sender;
             if(args.length > 0){
                 if(args[0].equalsIgnoreCase("survival") || args[0].equalsIgnoreCase("0") || args[0].equalsIgnoreCase("s")){
-                    player.setGameMode(GameMode.SURVIVAL);
-                    player.sendMessage(color("&aGamemode set to &fsurvival"));
-                    player.showTitle(Title.title(
-                            Component.text(color("&A&LSURVIVAL")),
-                            Component.text(color("&7Gamemode changed to survival.")),
-                            Title.Times.of(
-                                    Duration.ofMillis(500),
-                                    Duration.ofMillis(3000),
-                                    Duration.ofMillis(1000)
-                            )
-                    ));
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 29);
+                    if(player.hasPermission("adriianhessentials.gamemode.creative") || player.hasPermission("adriianh.gamemode.*")){
+                        player.setGameMode(GameMode.SURVIVAL);
+                        player.sendMessage(color("&aGamemode set to &fsurvival"));
+                        player.showTitle(Title.title(
+                                Component.text(color("&A&LSURVIVAL")),
+                                Component.text(color("&7Gamemode changed to survival.")),
+                                Title.Times.of(
+                                        Duration.ofMillis(500),
+                                        Duration.ofMillis(3000),
+                                        Duration.ofMillis(1000)
+                                )
+                        ));
+                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 29);
+                    }
                 }else if(args[0].equalsIgnoreCase("creative") || args[0].equalsIgnoreCase("1") || args[0].equalsIgnoreCase("c")){
-                    player.setGameMode(GameMode.CREATIVE);
-                    player.sendMessage(color("&aGamemode set to &fcreative"));
-                    player.showTitle(Title.title(
-                            Component.text(color("&A&lCREATIVE")),
-                            Component.text(color("&7Gamemode changed to creative.")),
-                            Title.Times.of(
-                                    Duration.ofMillis(500),
-                                    Duration.ofMillis(3000),
-                                    Duration.ofMillis(1000)
-                            )
-                    ));
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 29);
+                    if(player.hasPermission("adriianhessentials.gamemode.creative") || player.hasPermission("adriianh.gamemode.*")){
+                        player.setGameMode(GameMode.CREATIVE);
+                        player.sendMessage(color("&aGamemode set to &fcreative"));
+                        player.showTitle(Title.title(
+                                Component.text(color("&A&lCREATIVE")),
+                                Component.text(color("&7Gamemode changed to creative.")),
+                                Title.Times.of(
+                                        Duration.ofMillis(500),
+                                        Duration.ofMillis(3000),
+                                        Duration.ofMillis(1000)
+                                )
+                        ));
+                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 29);
+                    }
                 }else if(args[0].equalsIgnoreCase("adventure") || args[0].equalsIgnoreCase("2") || args[0].equalsIgnoreCase("a")){
-                    player.setGameMode(GameMode.ADVENTURE);
-                    player.sendMessage(color("&aGamemode set to &fadventure"));
-                    player.showTitle(Title.title(
-                            Component.text(color("&A&lADVENTURE")),
-                            Component.text(color("&7Gamemode changed to adventure.")),
-                            Title.Times.of(
-                                    Duration.ofMillis(500),
-                                    Duration.ofMillis(3000),
-                                    Duration.ofMillis(1000)
-                            )
-                    ));
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 29);
+                    if(player.hasPermission("adriianhessentials.gamemode.adventure") || player.hasPermission("adriianh.gamemode.*")){
+                        player.setGameMode(GameMode.ADVENTURE);
+                        player.sendMessage(color("&aGamemode set to &fadventure"));
+                        player.showTitle(Title.title(
+                                Component.text(color("&A&lADVENTURE")),
+                                Component.text(color("&7Gamemode changed to adventure.")),
+                                Title.Times.of(
+                                        Duration.ofMillis(500),
+                                        Duration.ofMillis(3000),
+                                        Duration.ofMillis(1000)
+                                )
+                        ));
+                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 29);
+                    }
                 }else if(args[0].equalsIgnoreCase("spectator") || args[0].equalsIgnoreCase("3") || args[0].equalsIgnoreCase("spc")){
-                    player.setGameMode(GameMode.SPECTATOR);
-                    player.sendMessage(color("&aGamemode set to &fspectator"));
-                    player.showTitle(Title.title(
-                            Component.text(color("&A&lSPECTATOR")),
-                            Component.text(color("&7Gamemode changed to spectator.")),
-                            Title.Times.of(
-                                    Duration.ofMillis(500),
-                                    Duration.ofMillis(3000),
-                                    Duration.ofMillis(1000)
-                            )
-                    ));
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 29);
+                    if(player.hasPermission("adriianhessentials.gamemode.spectator") || player.hasPermission("adriianh.gamemode.*")){
+                        player.setGameMode(GameMode.SPECTATOR);
+                        player.sendMessage(color("&aGamemode set to &fspectator"));
+                        player.showTitle(Title.title(
+                                Component.text(color("&A&lSPECTATOR")),
+                                Component.text(color("&7Gamemode changed to spectator.")),
+                                Title.Times.of(
+                                     Duration.ofMillis(500),
+                                     Duration.ofMillis(3000),
+                                     Duration.ofMillis(1000)
+                             )
+                        ));
+                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 29);
+                    }
                 }else{
                     player.sendMessage(color("&aThis gamemode doesn't exist."));
                 }

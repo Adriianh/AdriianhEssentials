@@ -1,5 +1,6 @@
 package me.adriianhdev.adriianhessentials;
 
+import me.adriianhdev.adriianhessentials.commands.FlyCommand;
 import me.adriianhdev.adriianhessentials.commands.GamemodeCommand;
 import me.adriianhdev.adriianhessentials.commands.KillCommand;
 import org.bukkit.ChatColor;
@@ -24,6 +25,8 @@ public final class AdriianhEssentials extends JavaPlugin {
                 .setExecutor(new GamemodeCommand());
         getCommand("kill")
                 .setExecutor(new KillCommand());
+        getCommand("fly")
+                .setExecutor(new FlyCommand());
     }
 
     public String color(String  text){
