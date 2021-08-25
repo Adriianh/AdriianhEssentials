@@ -45,6 +45,8 @@ public final class AdriianhEssentials extends JavaPlugin {
                 .setExecutor(new KillCommand());
         getCommand("fly")
                 .setExecutor(new FlyCommand(this));
+        getCommand("god")
+                .setExecutor(new KillCommand());
     }
 
     public void registerEvents(){
