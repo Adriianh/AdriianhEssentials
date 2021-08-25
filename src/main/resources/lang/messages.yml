@@ -1,6 +1,26 @@
 #######################################
 #    Messages - AdriianhEssentials    #
 #######################################
+messages:
+  command-error: "&cThis command doesn't exist. Please use /AdriianhEssentials help"
+  command-help:
+    - "AdriianhEssentials | Admin Commands"
+    - ""
+    - "/as reload"
+    - "/as about"
+    - "/as help"
+    - ""
+
+
+
+
+
+
+
+
+#######################################
+#         Messages - Commands         #
+#######################################
 
 #Gamemode messages
 gamemode:
@@ -33,3 +53,4 @@ fly:
     pitch:
       activated: 1
       deactivated: 1
+

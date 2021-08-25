@@ -5,7 +5,6 @@ import me.adriianhdev.adriianhessentials.utils.SoundUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -46,10 +45,10 @@ public class FlyCommand implements CommandExecutor {
                     Player target = Bukkit.getPlayerExact(args[0]);
                     flyMethod(target);
                 }else{
-                    player.sendMessage(color("&aYou don't have the required permission. &f(adriianhessentials.fly.others)"));
+                    player.sendMessage("&aYou don't have the required permission. &f(adriianhessentials.fly.others)");
                     player.showTitle(Title.title(
-                            Component.text(color("&C&lERROR")),
-                            Component.text(color("&7You can't do this.")),
+                            Component.text("&C&lERROR"),
+                            Component.text("&7You can't do this."),
                             Title.Times.of(
                                     Duration.ofMillis(500),
                                     Duration.ofMillis(3000),
@@ -63,27 +62,23 @@ public class FlyCommand implements CommandExecutor {
         return true;
     }
 
-    public String color(String text){
-        return ChatColor.translateAlternateColorCodes('&', text);
-    }
-
     private void flyMethod(Player player){
-        deactivatedSound = plugin.getCustomConfig().getString("sounds.sound.deactivated-id");
-        activatedSound = plugin.getCustomConfig().getString("sounds.sound.deactivated-id");
-        volume = plugin.getCustomConfig().getInt("sounds.volume.activated");
-        dvolume = plugin.getCustomConfig().getInt("sounds.volume.deactivated");
-        pitch = plugin.getCustomConfig().getInt("sounds.pitch.activated");
-        dpitch = plugin.getCustomConfig().getInt("sounds.pitch.deactivated");
+        deactivatedSound = "Sound deactivated";
+        activatedSound = "Sound activated";
+        volume = 1;
+        dvolume = 1;
+        pitch = 1;
+        dpitch = 1;
 
 
         if(player.hasPermission("adriianhessentials.fly")){
             if(list_of_flying_players.contains(player)){
                 list_of_flying_players.remove(player);
                 player.setAllowFlight(false);
-                player.sendMessage(plugin.getCustomConfig().getString("fly.messages.deactivated"));
+                player.sendMessage("Fly enabled");
                 player.showTitle(Title.title(
-                        Component.text(plugin.getCustomConfig().getString("fly.title.deactivated")),
-                        Component.text(plugin.getCustomConfig().getString("fly.subtitle.deactivated")),
+                        Component.text("ENABLED"),
+                        Component.text("Now you can fly"),
                         Title.Times.of(
                                 Duration.ofMillis(500),
                                 Duration.ofMillis(3000),
@@ -98,14 +93,14 @@ public class FlyCommand implements CommandExecutor {
             }else if(!list_of_flying_players.contains(player)){
                 list_of_flying_players.add(player);
                 player.setAllowFlight(true);
-                player.sendMessage(plugin.getCustomConfig().getString("fly.messages.activated"));
+                player.sendMessage("Fly disabled");
                 player.showTitle(Title.title(
-                        Component.text(plugin.getCustomConfig().getString("fly.title.activated")),
-                        Component.text(plugin.getCustomConfig().getString("fly.subtitle.activated")),
+                        Component.text("DISABLED"),
+                        Component.text("Now you can't fly"),
                         Title.Times.of(
-                                Duration.ofMillis(plugin.getCustomConfig().getInt("fly.title.fadeIn")),
-                                Duration.ofMillis(plugin.getCustomConfig().getInt("fly.title.stay")),
-                                Duration.ofMillis(plugin.getCustomConfig().getInt("fly.title.fadeOut"))
+                                Duration.ofMillis(500),
+                                Duration.ofMillis(3000),
+                                Duration.ofMillis(100)
                         )
                 ));
                 SoundUtil.playSound(

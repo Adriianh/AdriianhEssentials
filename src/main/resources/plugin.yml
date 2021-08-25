@@ -16,3 +16,9 @@ commands:
     description: Allows you to fly.
     usage: /<command>
     aliases: [flight]
+  reload:
+    description: Plugin help messages.
+    usage: /<command>
+  nickgui:
+    description: Open a nick color menu.
+    usage: /<command>
