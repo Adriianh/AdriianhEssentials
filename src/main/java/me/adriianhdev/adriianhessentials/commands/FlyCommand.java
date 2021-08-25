@@ -10,19 +10,18 @@ import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.Duration;
-import java.util.ArrayList;
 
 public class FlyCommand implements CommandExecutor {
 
-    private AdriianhEssentials plugin;
-    private ArrayList<Player> list_of_flying_players = new ArrayList<>();
+    private final FileConfiguration config;
 
     public FlyCommand(AdriianhEssentials plugin) {
-        this.plugin = plugin;
+        this.config = plugin.getConfig();
     }
 
     //Default valor of Sounds - Activated
@@ -37,30 +36,40 @@ public class FlyCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-        if(sender instanceof Player){
-            Player player = (Player) sender;
-            if(args.length == 0){
-                flyMethod(player);
-            }else if(args.length == 1){
-                if(player.hasPermission("adriianhessentials.fly.others")){
-                    Player target = Bukkit.getPlayerExact(args[0]);
-                    flyMethod(target);
-                }else{
-                    player.sendMessage(color("&aYou don't have the required permission. &f(adriianhessentials.fly.others)"));
-                    player.showTitle(Title.title(
-                            Component.text(color("&C&lERROR")),
-                            Component.text(color("&7You can't do this.")),
-                            Title.Times.of(
-                                    Duration.ofMillis(500),
-                                    Duration.ofMillis(3000),
-                                    Duration.ofMillis(1000)
-                            )
-                    ));
-                }
-            }
+        if(!(sender instanceof Player)) {
+            sender.sendMessage("You can''t use this command in console");
+            return true;
         }
 
-        return true;
+        Player player = (Player) sender;
+
+        if (!(args.length > 0)) {
+            flyMethod(player);
+            return true;
+        }
+
+        if (!(player.hasPermission("adriianhessentials.fly.others"))) {
+            player.sendMessage(color("&aYou don't have the required permission. &f(adriianhessentials.fly.others)"));
+            player.showTitle(Title.title(
+                    Component.text(color("&C&lERROR")),
+                    Component.text(color("&7You can't do this.")),
+                    Title.Times.of(
+                            Duration.ofMillis(500),
+                            Duration.ofMillis(3000),
+                            Duration.ofMillis(1000)
+                    )
+            ));
+            return true;
+        }
+
+        Player target = Bukkit.getPlayerExact(args[0]);
+
+        if (target == null) {
+            player.sendMessage("This player is null, please view");
+            return true;
+        }
+        flyMethod(target);
+        return  true;
     }
 
     public String color(String text){
@@ -68,53 +77,52 @@ public class FlyCommand implements CommandExecutor {
     }
 
     private void flyMethod(Player player){
-        deactivatedSound = plugin.getCustomConfig().getString("sounds.sound.deactivated-id");
-        activatedSound = plugin.getCustomConfig().getString("sounds.sound.deactivated-id");
-        volume = plugin.getCustomConfig().getInt("sounds.volume.activated");
-        dvolume = plugin.getCustomConfig().getInt("sounds.volume.deactivated");
-        pitch = plugin.getCustomConfig().getInt("sounds.pitch.activated");
-        dpitch = plugin.getCustomConfig().getInt("sounds.pitch.deactivated");
+        if (player.hasPermission("adriianhessentials.fly"))
+            return;
+
+        deactivatedSound = config.getString("sounds.sound.deactivated-id");
+        activatedSound = config.getString("sounds.sound.deactivated-id");
+        volume = config.getInt("sounds.volume.activated");
+        dvolume = config.getInt("sounds.volume.deactivated");
+        pitch = config.getInt("sounds.pitch.activated");
+        dpitch = config.getInt("sounds.pitch.deactivated");
 
 
-        if(player.hasPermission("adriianhessentials.fly")){
-            if(list_of_flying_players.contains(player)){
-                list_of_flying_players.remove(player);
-                player.setAllowFlight(false);
-                player.sendMessage(plugin.getCustomConfig().getString("fly.messages.deactivated"));
-                player.showTitle(Title.title(
-                        Component.text(plugin.getCustomConfig().getString("fly.title.deactivated")),
-                        Component.text(plugin.getCustomConfig().getString("fly.subtitle.deactivated")),
-                        Title.Times.of(
-                                Duration.ofMillis(500),
-                                Duration.ofMillis(3000),
-                                Duration.ofMillis(1000)
-                        )
-                ));
-                SoundUtil.playSound(
-                        deactivatedSound,
-                        player,
-                        dvolume,
-                        dpitch);
-            }else if(!list_of_flying_players.contains(player)){
-                list_of_flying_players.add(player);
-                player.setAllowFlight(true);
-                player.sendMessage(plugin.getCustomConfig().getString("fly.messages.activated"));
-                player.showTitle(Title.title(
-                        Component.text(plugin.getCustomConfig().getString("fly.title.activated")),
-                        Component.text(plugin.getCustomConfig().getString("fly.subtitle.activated")),
-                        Title.Times.of(
-                                Duration.ofMillis(plugin.getCustomConfig().getInt("fly.title.fadeIn")),
-                                Duration.ofMillis(plugin.getCustomConfig().getInt("fly.title.stay")),
-                                Duration.ofMillis(plugin.getCustomConfig().getInt("fly.title.fadeOut"))
-                        )
-                ));
-                SoundUtil.playSound(
-                        activatedSound,
-                        player,
-                        volume,
-                        pitch);
-                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 29);
-            }
+        if (player.getAllowFlight() && player.isFlying()) {
+            player.setAllowFlight(false);
+            player.sendMessage(config.getString("fly.messages.deactivated"));
+            player.showTitle(Title.title(
+                    Component.text(config.getString("fly.title.deactivated")),
+                    Component.text(config.getString("fly.subtitle.deactivated")),
+                    Title.Times.of(
+                            Duration.ofMillis(500),
+                            Duration.ofMillis(3000),
+                            Duration.ofMillis(1000)
+                    )
+            ));
+            SoundUtil.playSound(
+                    deactivatedSound,
+                    player,
+                    dvolume,
+                    dpitch);
+            return;
         }
+        player.setAllowFlight(true);
+        player.sendMessage(config.getString("fly.messages.activated"));
+        player.showTitle(Title.title(
+                Component.text(config.getString("fly.title.activated")),
+                Component.text(config.getString("fly.subtitle.activated")),
+                Title.Times.of(
+                        Duration.ofMillis(config.getInt("fly.title.fadeIn")),
+                        Duration.ofMillis(config.getInt("fly.title.stay")),
+                        Duration.ofMillis(config.getInt("fly.title.fadeOut"))
+                )
+        ));
+        SoundUtil.playSound(
+                activatedSound,
+                player,
+                volume,
+                pitch);
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 29);
     }
 }
