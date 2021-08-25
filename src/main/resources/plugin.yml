@@ -5,14 +5,18 @@ api-version: 1.17
 authors: [ AdriianhDev ]
 description: A simple essentials plugin.
 commands:
-  kill:
-    description: Kill yourself or another player.
-    usage: /<command>
   gamemode:
     description: Changes the gamemode of a player.
     usage: /<command>
     aliases: [gm, mode]
+  kill:
+    description: Kill yourself or another player.
+    usage: /<command>
   fly:
     description: Allows you to fly.
     usage: /<command>
     aliases: [flight]
+  god:
+    description: Enable the god mode.
+    usage: /<command>
+    aliases: [godmode]

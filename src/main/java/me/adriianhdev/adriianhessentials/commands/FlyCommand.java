@@ -5,7 +5,6 @@ import me.adriianhdev.adriianhessentials.utils.SoundUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,7 +22,7 @@ public class FlyCommand implements CommandExecutor {
     public FlyCommand(AdriianhEssentials plugin) {
         this.config = plugin.getConfig();
     }
-
+ 
     //Default valor of Sounds - Activated
     String activatedSound = "ENTITY.EXPERIENCE_ORB.PICKUP";
     float volume = 1f;
@@ -70,10 +69,6 @@ public class FlyCommand implements CommandExecutor {
         }
         flyMethod(target);
         return  true;
-    }
-
-    public String color(String text){
-        return ChatColor.translateAlternateColorCodes('&', text);
     }
 
     private void flyMethod(Player player){

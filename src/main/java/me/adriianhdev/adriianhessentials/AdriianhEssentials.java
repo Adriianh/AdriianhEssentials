@@ -1,25 +1,14 @@
 package me.adriianhdev.adriianhessentials;
 
-import me.adriianhdev.adriianhessentials.commands.FlyCommand;
-import me.adriianhdev.adriianhessentials.commands.GamemodeCommand;
-import me.adriianhdev.adriianhessentials.commands.KillCommand;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
+import me.adriianhdev.adriianhessentials.commands.*;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
 
 public final class AdriianhEssentials extends JavaPlugin {
 
-    private File customConfigFile;
-    private FileConfiguration customConfig;
-
     @Override
     public void onEnable() {
-
-        AdriianhEssentials plugin = this;
         // Plugin startup logic
         getLogger().info("");
         getLogger().info("Loading AdriianhEssentials...");
@@ -30,7 +19,8 @@ public final class AdriianhEssentials extends JavaPlugin {
         this.registerCommands();
         getLogger().info("Registering files...");
         this.registerFiles();
-        createCustomConfig();
+        getLogger().info("Registering events...");
+        this.registerEvents();
 
         getLogger().info("");
         getLogger().info("Successful loading!");
@@ -55,8 +45,13 @@ public final class AdriianhEssentials extends JavaPlugin {
                 .setExecutor(new KillCommand());
         getCommand("fly")
                 .setExecutor(new FlyCommand(this));
-
+        getCommand("god")
+                .setExecutor(new KillCommand());
     }
+
+    public void registerEvents(){
+    }
+
     public void registerFiles(){
         //Setup config files
         getConfig().options().copyDefaults();
@@ -64,24 +59,4 @@ public final class AdriianhEssentials extends JavaPlugin {
 
         //Setup custom config files
     }
-
-    public FileConfiguration getCustomConfig() {
-        return this.customConfig;
-    }
-
-    private void createCustomConfig() {
-        customConfigFile = new File(getDataFolder(), "messages.yml");
-        if (!customConfigFile.exists()) {
-            customConfigFile.getParentFile().mkdirs();
-            saveResource("messages.yml", false);
-        }
-
-        customConfig= new YamlConfiguration();
-        try {
-            customConfig.load(customConfigFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

@@ -62,12 +62,10 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
-            <!-- ... -->
-            <repository> <!-- for development builds -->
-                <id>sonatype-oss-snapshots</id>
-                <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            </repository>
-            <!-- ... -->
+        <repository> <!-- for development builds -->
+            <id>sonatype-oss-snapshots</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
     </repositories>
 
     <dependencies>
