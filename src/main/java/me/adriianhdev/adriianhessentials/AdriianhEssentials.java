@@ -42,11 +42,11 @@ public final class AdriianhEssentials extends JavaPlugin {
         getCommand("gamemode")
                 .setExecutor(new GamemodeCommand());
         getCommand("kill")
-                .setExecutor(new KillCommand());
+                .setExecutor(new KillCommand(this));
         getCommand("fly")
                 .setExecutor(new FlyCommand(this));
         getCommand("god")
-                .setExecutor(new KillCommand());
+                .setExecutor(new GodModeCommand(this));
     }
 
     public void registerEvents(){

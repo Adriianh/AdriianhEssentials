@@ -21,7 +21,7 @@ public class ArmorStandCommand implements CommandExecutor {
             ArmorStand armorstand = (ArmorStand) player.getWorld().spawnEntity(player.getLocation(), EntityType.ARMOR_STAND);
             armorstand.setArms(true);
             armorstand.setInvulnerable(true);
-            
+
 
         }
 
