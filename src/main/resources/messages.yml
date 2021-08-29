@@ -10,24 +10,31 @@ messages:
     - "/as about"
     - "/as help"
     - ""
-
-
-
-
-
-
-
-
+error:
+  message:
+    no-permission: "&cYou don't have the required permission."
+    null-player: "&cThis player doesn't exist."
+    non-player: "&cThis command must be executed by a player!"
+    non-argument: "&cYou need to give at least one argument."
+  title:
+    no-permission: "&c&lERROR"
+  subtitles:
+    no-permission: "&7You don't have the required permission."
 #######################################
 #         Messages - Commands         #
 #######################################
 
 #Gamemode messages
 gamemode:
-  survival: ""
-  creative: ""
-  adventure: ""
-  spectator: ""
+  message: "&aYour gamemode is now: %aessentials_gamemode%"
+  title: "%aessentials_gamemode%"
+  subtitle: "&7Your gamemode has been changed."
+  times:
+    fadeIn: "500"
+    stay: "3000"
+    fadeOut: "1000"
+  error:
+    non-exist: "&cThis gamemode doesn't exist.'"
 
 #Fly messages
 fly:
@@ -37,12 +44,13 @@ fly:
   titles:
     activated: "&a&lFLY ACTIVATED"
     deactivated: "&c&lFLY DEACTIVATED"
-    fadeIn: "500"
-    stay: "3000"
-    fadeOut: "1000"
   subtitles:
     activated: "&7Now you can fly."
     deactivated: "&7Now you can't fly."
+  times:
+    fadeIn: "500"
+    stay: "3000"
+    fadeOut: "1000"
   sounds:
     sound:
       activated-id: "ENTITY.EXPERIENCE_ORB.PICKUP"
@@ -54,3 +62,12 @@ fly:
       activated: 1
       deactivated: 1
 
+#Join and Quit Events
+join-events:
+  message:
+    enable: true
+    text: "<dark_gray>[<green>+<dark_gray>] <gradient:green:blue>%player%</gradient> <gray>just entered"
+quit-events:
+  message:
+    enable: true
+    text: "<dark_gray>[<red>-<dark_gray>] <gradient:green:blue>%player%</gradient> <gray>just left"

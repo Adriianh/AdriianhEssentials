@@ -9,18 +9,18 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoinListener implements Listener {
 
-    private final FileManager config;
+    private final FileManager messages;
 
     public PlayerJoinListener(AdriianhEssentials plugin) {
-        this.config = plugin.getFiles().getConfig();
+        this.messages = plugin.getFiles().getMessages();
     }
 
     @EventHandler
     private void playerJoinMessage(PlayerJoinEvent event) {
-        if (!config.getBoolean("join-events.message.enable")) return;
+        if (!messages.getBoolean("join-events.message.enable")) return;
 
         event.joinMessage(AdventureUtil.parse(
-                config.getString("join-events.message.line")
+                messages.getString("join-events.message.text")
                         .replaceAll("%player%", event.getPlayer().getName())
                         .replaceAll("%displayname%", event.getPlayer().displayName().toString())
         ));

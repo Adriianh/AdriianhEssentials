@@ -45,7 +45,7 @@ public final class AdriianhEssentials extends JavaPlugin {
     public void registerCommands(){
         //Command register
         getCommand("gamemode")
-                .setExecutor(new GamemodeCommand());
+                .setExecutor(new GamemodeCommand(this));
         getCommand("kill")
                 .setExecutor(new KillCommand(this));
         getCommand("fly")

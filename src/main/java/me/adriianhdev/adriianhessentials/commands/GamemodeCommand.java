@@ -1,5 +1,7 @@
 package me.adriianhdev.adriianhessentials.commands;
 
+import me.adriianhdev.adriianhessentials.AdriianhEssentials;
+import me.adriianhdev.adriianhessentials.utils.AdventureUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
@@ -9,6 +11,7 @@ import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,17 +19,24 @@ import java.time.Duration;
 
 public class GamemodeCommand implements CommandExecutor {
 
+    private final FileConfiguration messages;
+
+    public GamemodeCommand(AdriianhEssentials plugin) {
+        this.messages = plugin.getConfig();
+    }
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
         if (!(sender instanceof Player)) {
-            Bukkit.getLogger().info("This command must be executed by a player");
+            Bukkit.getLogger().info(messages.getString("error.message.non-player"));
             return true;
         }
 
         Player player = (Player) sender;
         if (!(args.length > 0)) {
-            player.sendMessage("You need to give an argument.");
+            player.sendMessage(AdventureUtil.parse(
+                    messages.getString("error.message.non-argument")));
             player.sendMessage("/gamemode [gamemode]");
             return true;
         }
@@ -39,34 +49,42 @@ public class GamemodeCommand implements CommandExecutor {
                     return true;
                 }
                 player.setGameMode(GameMode.SURVIVAL);
-                player.sendMessage(color("&aGamemode set to &fsurvival"));
+                player.sendMessage(AdventureUtil.parse(
+                        messages.getString("gamemode.message")
+
+                ));
                 player.showTitle(Title.title(
-                        Component.text(color("&A&LSURVIVAL")),
-                        Component.text(color("&7Gamemode changed to survival.")),
+                        AdventureUtil.parse(
+                                messages.getString("gamemode.title")),
+                        AdventureUtil.parse(
+                                messages.getString("gamemode.subtitle")),
                         Title.Times.of(
-                                Duration.ofMillis(500),
-                                Duration.ofMillis(3000),
-                                Duration.ofMillis(1000)
+                                Duration.ofMillis(messages.getInt("gamemode.times.fadeIn")),
+                                Duration.ofMillis(messages.getInt("gamemode.times.stay")),
+                                Duration.ofMillis(messages.getInt("gamemode.times.fadeOut"))
                         )
                 ));
-                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 29);
                 break;
             case "creative":
             case "c":
             case "1":
                 if(player.hasPermission("adriianhessentials.gamemode.creative") || player.hasPermission("adriianh.gamemode.*")){
                     player.setGameMode(GameMode.CREATIVE);
-                    player.sendMessage(color("&aGamemode set to &fcreative"));
+                    player.sendMessage(AdventureUtil.parse(
+                            messages.getString("gamemode.message")
+
+                    ));
                     player.showTitle(Title.title(
-                            Component.text(color("&A&lCREATIVE")),
-                            Component.text(color("&7Gamemode changed to creative.")),
+                            AdventureUtil.parse(
+                                    messages.getString("gamemode.title")),
+                            AdventureUtil.parse(
+                                    messages.getString("gamemode.subtitle")),
                             Title.Times.of(
-                                    Duration.ofMillis(500),
-                                    Duration.ofMillis(3000),
-                                    Duration.ofMillis(1000)
+                                    Duration.ofMillis(messages.getInt("gamemode.times.fadeIn")),
+                                    Duration.ofMillis(messages.getInt("gamemode.times.stay")),
+                                    Duration.ofMillis(messages.getInt("gamemode.times.fadeOut"))
                             )
                     ));
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 29);
                 }
                 break;
             case "adventure":
@@ -74,17 +92,21 @@ public class GamemodeCommand implements CommandExecutor {
             case "2":
                 if(player.hasPermission("adriianhessentials.gamemode.adventure") || player.hasPermission("adriianh.gamemode.*")){
                     player.setGameMode(GameMode.ADVENTURE);
-                    player.sendMessage(color("&aGamemode set to &fadventure"));
+                    player.sendMessage(AdventureUtil.parse(
+                            messages.getString("gamemode.message")
+
+                    ));
                     player.showTitle(Title.title(
-                            Component.text(color("&A&lADVENTURE")),
-                            Component.text(color("&7Gamemode changed to adventure.")),
+                            AdventureUtil.parse(
+                                    messages.getString("gamemode.title")),
+                            AdventureUtil.parse(
+                                    messages.getString("gamemode.subtitle")),
                             Title.Times.of(
-                                    Duration.ofMillis(500),
-                                    Duration.ofMillis(3000),
-                                    Duration.ofMillis(1000)
+                                    Duration.ofMillis(messages.getInt("gamemode.times.fadeIn")),
+                                    Duration.ofMillis(messages.getInt("gamemode.times.stay")),
+                                    Duration.ofMillis(messages.getInt("gamemode.times.fadeOut"))
                             )
                     ));
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 29);
                 }
                 break;
             case "spectator":
@@ -92,26 +114,27 @@ public class GamemodeCommand implements CommandExecutor {
             case "3":
                 if(player.hasPermission("adriianhessentials.gamemode.spectator") || player.hasPermission("adriianh.gamemode.*")){
                     player.setGameMode(GameMode.SPECTATOR);
-                    player.sendMessage(color("&aGamemode set to &fspectator"));
+                    player.sendMessage(AdventureUtil.parse(
+                            messages.getString("gamemode.message")
+
+                    ));
                     player.showTitle(Title.title(
-                            Component.text(color("&A&lSPECTATOR")),
-                            Component.text(color("&7Gamemode changed to spectator.")),
+                            AdventureUtil.parse(
+                                    messages.getString("gamemode.title")),
+                            AdventureUtil.parse(
+                                    messages.getString("gamemode.subtitle")),
                             Title.Times.of(
-                                    Duration.ofMillis(500),
-                                    Duration.ofMillis(3000),
-                                    Duration.ofMillis(1000)
+                                    Duration.ofMillis(messages.getInt("gamemode.times.fadeIn")),
+                                    Duration.ofMillis(messages.getInt("gamemode.times.stay")),
+                                    Duration.ofMillis(messages.getInt("gamemode.times.fadeOut"))
                             )
                     ));
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 10, 29);
                 }
                 break;
             default:
-                player.sendMessage(color("&aThis gamemode doesn't exist."));
+                player.sendMessage(AdventureUtil.parse(messages.getString("gamemode.error.non-exist")));
                 break;
         }
         return false;
-    }
-    public String color(String text) {
-        return ChatColor.translateAlternateColorCodes('&', text);
     }
 }

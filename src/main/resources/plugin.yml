@@ -16,6 +16,7 @@ commands:
   kill:
     description: Kill yourself or another player.
     usage: /<command>
+    aliases: [suicide]
   fly:
     description: Allows you to fly.
     usage: /<command>
