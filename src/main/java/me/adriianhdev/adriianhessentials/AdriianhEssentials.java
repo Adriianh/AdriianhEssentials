@@ -1,31 +1,36 @@
 package me.adriianhdev.adriianhessentials;
 
+import me.adriianhdev.adriianhessentials.api.Loader;
 import me.adriianhdev.adriianhessentials.commands.*;
+import me.adriianhdev.adriianhessentials.loaders.FilesLoader;
+import me.adriianhdev.adriianhessentials.loaders.ListenersLoader;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 
 public final class AdriianhEssentials extends JavaPlugin {
 
+    private final FilesLoader filesLoader = new FilesLoader(this);
+
     @Override
     public void onEnable() {
+
         // Plugin startup logic
         getLogger().info("");
         getLogger().info("Loading AdriianhEssentials...");
         getLogger().info("This won't take long.");
         getLogger().info("");
-
+        this.initLoaders(
+                this.filesLoader,
+                new ListenersLoader(this)
+        );
         getLogger().info("Registering commands...");
         this.registerCommands();
-        getLogger().info("Registering files...");
-        this.registerFiles();
-        getLogger().info("Registering events...");
-        this.registerEvents();
 
         getLogger().info("");
         getLogger().info("Successful loading!");
-        getLogger().info("Plugin version: "+getDescription().getVersion());
-        getLogger().info("Author: "+getDescription().getAuthors());
+        getLogger().info("Plugin version: " + getDescription().getVersion());
+        getLogger().info("Author: " + getDescription().getAuthors());
     }
 
     @Override
@@ -47,16 +52,17 @@ public final class AdriianhEssentials extends JavaPlugin {
                 .setExecutor(new FlyCommand(this));
         getCommand("god")
                 .setExecutor(new GodModeCommand(this));
+        getCommand("adriianhessentials")
+                .setExecutor(new MainCommand(this));
     }
 
-    public void registerEvents(){
+    private void initLoaders(Loader...loaders) {
+        for(Loader loader : loaders) {
+            loader.load();
+        }
     }
 
-    public void registerFiles(){
-        //Setup config files
-        getConfig().options().copyDefaults();
-        saveDefaultConfig();
-
-        //Setup custom config files
+    public FilesLoader getFiles() {
+        return filesLoader;
     }
 }

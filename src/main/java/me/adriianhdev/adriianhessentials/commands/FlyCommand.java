@@ -1,6 +1,7 @@
 package me.adriianhdev.adriianhessentials.commands;
 
 import me.adriianhdev.adriianhessentials.AdriianhEssentials;
+import me.adriianhdev.adriianhessentials.managers.FileManager;
 import me.adriianhdev.adriianhessentials.utils.SoundUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
@@ -9,7 +10,6 @@ import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,10 +17,10 @@ import java.time.Duration;
 
 public class FlyCommand implements CommandExecutor {
 
-    private final FileConfiguration config;
+    private final FileManager config;
 
     public FlyCommand(AdriianhEssentials plugin) {
-        this.config = plugin.getConfig();
+        this.config = plugin.getFiles().getConfig();
     }
  
     //Default valor of Sounds - Activated
@@ -48,10 +48,10 @@ public class FlyCommand implements CommandExecutor {
         }
 
         if (!(player.hasPermission("adriianhessentials.fly.others"))) {
-            player.sendMessage(color("&aYou don't have the required permission. &f(adriianhessentials.fly.others)"));
+            player.sendMessage("&aYou don't have the required permission. &f(adriianhessentials.fly.others)");
             player.showTitle(Title.title(
-                    Component.text(color("&C&lERROR")),
-                    Component.text(color("&7You can't do this.")),
+                    Component.text("&C&lERROR"),
+                    Component.text("&7You can't do this."),
                     Title.Times.of(
                             Duration.ofMillis(500),
                             Duration.ofMillis(3000),
