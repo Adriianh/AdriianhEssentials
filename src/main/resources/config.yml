@@ -1,3 +1,11 @@
+join-events:
+  message:
+    enable: true
+    line: "<dark_gray>[<green>+<dark_gray>] <gradient:green:blue>%player%</gradient> <gray>just entered"
+quit-events:
+  message:
+    enable: true
+    line: "<dark_gray>[<red>-<dark_gray>] <gradient:green:blue>%player%</gradient> <gray>just left"
 Food: 'Potato'
 FoodList:
   - 'Potato'

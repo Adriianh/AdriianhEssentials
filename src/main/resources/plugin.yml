@@ -5,6 +5,10 @@ api-version: 1.17
 authors: [ AdriianhDev ]
 description: A simple essentials plugin.
 commands:
+  adriianhessentials:
+    description: General command of plugin
+    usage: /<command>
+    aliases: [ae, ess, essentials]
   gamemode:
     description: Changes the gamemode of a player.
     usage: /<command>
