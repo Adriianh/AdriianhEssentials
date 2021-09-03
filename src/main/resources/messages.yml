@@ -3,6 +3,7 @@
 #######################################
 messages:
   command-error: "&cThis command doesn't exist. Please use /AdriianhEssentials help"
+  reload-config: "&aConfig reloaded!"
   command-help:
     - "AdriianhEssentials | Admin Commands"
     - ""
@@ -11,7 +12,7 @@ messages:
     - "/as help"
     - ""
 error:
-  message:
+  messages:
     no-permission: "&cYou don't have the required permission."
     null-player: "&cThis player doesn't exist."
     non-player: "&cThis command must be executed by a player!"

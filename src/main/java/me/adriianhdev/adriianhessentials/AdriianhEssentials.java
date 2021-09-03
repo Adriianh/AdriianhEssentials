@@ -6,8 +6,6 @@ import me.adriianhdev.adriianhessentials.loaders.FilesLoader;
 import me.adriianhdev.adriianhessentials.loaders.ListenersLoader;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-
 public final class AdriianhEssentials extends JavaPlugin {
 
     private final FilesLoader filesLoader = new FilesLoader(this);

@@ -2,12 +2,9 @@ package me.adriianhdev.adriianhessentials.commands;
 
 import me.adriianhdev.adriianhessentials.AdriianhEssentials;
 import me.adriianhdev.adriianhessentials.utils.AdventureUtil;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
-import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -71,7 +68,7 @@ public class GamemodeCommand implements CommandExecutor {
                 if(player.hasPermission("adriianhessentials.gamemode.creative") || player.hasPermission("adriianh.gamemode.*")){
                     player.setGameMode(GameMode.CREATIVE);
                     player.sendMessage(AdventureUtil.parse(
-                            messages.getString("gamemode.message")
+                            messages.getString("gamemode.messages")
 
                     ));
                     player.showTitle(Title.title(
