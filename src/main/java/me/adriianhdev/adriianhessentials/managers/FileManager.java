@@ -1,12 +1,15 @@
 package me.adriianhdev.adriianhessentials.managers;
 
 import me.adriianhdev.adriianhessentials.AdriianhEssentials;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public class FileManager extends YamlConfiguration {
@@ -92,4 +95,16 @@ public class FileManager extends YamlConfiguration {
     public String getString(String path) {
         return ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(super.getString(path)));
     }
+
+    @Override
+    public List<String> getStringList(String path) {
+        List<String> list = super.getStringList(path);
+        list.forEach(line -> ChatColor.translateAlternateColorCodes('&', line));
+        return list;
+    }
+
+    public Component getComponent(String path) {
+        return MiniMessage.get().parse(Objects.requireNonNull(this.getString(path)));
+    }
+
 }
