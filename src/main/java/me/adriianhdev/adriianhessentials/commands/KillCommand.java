@@ -1,6 +1,8 @@
 package me.adriianhdev.adriianhessentials.commands;
 
 import me.adriianhdev.adriianhessentials.AdriianhEssentials;
+import me.adriianhdev.adriianhessentials.PluginCore;
+import me.adriianhdev.adriianhessentials.managers.FileManager;
 import me.adriianhdev.adriianhessentials.utils.SoundUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
@@ -17,10 +19,12 @@ import java.time.Duration;
 
 public class KillCommand implements CommandExecutor {
 
-    private final FileConfiguration config;
+    private final PluginCore pluginCore;
+    private final FileManager messages;
 
-    public KillCommand(AdriianhEssentials plugin) {
-        this.config = plugin.getConfig();
+    public KillCommand(PluginCore pluginCore) {
+        this.pluginCore = pluginCore;
+        this.messages = pluginCore.getFilesLoader().getMessages();
     }
 
     //Default valor of Sounds - Activated
@@ -75,12 +79,12 @@ public class KillCommand implements CommandExecutor {
         if(player.hasPermission("adriianhessentials.command.kill"))
             return;
 
-        deactivatedSound = config.getString("sounds.sound.deactivated-id");
-        activatedSound = config.getString("sounds.sound.deactivated-id");
-        volume = config.getInt("sounds.volume.activated");
-        dvolume = config.getInt("sounds.volume.deactivated");
-        pitch = config.getInt("sounds.pitch.activated");
-        dpitch = config.getInt("sounds.pitch.deactivated");
+        deactivatedSound = messages.getString("sounds.sound.deactivated-id");
+        activatedSound = messages.getString("sounds.sound.deactivated-id");
+        volume = messages.getInt("sounds.volume.activated");
+        dvolume = messages.getInt("sounds.volume.deactivated");
+        pitch = messages.getInt("sounds.pitch.activated");
+        dpitch = messages.getInt("sounds.pitch.deactivated");
 
         if(player.isInvulnerable()){
             player.sendMessage("You can't death. Please deactivate the god mode.");

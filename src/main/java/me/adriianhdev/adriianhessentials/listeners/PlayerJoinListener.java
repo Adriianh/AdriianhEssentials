@@ -1,7 +1,7 @@
 package me.adriianhdev.adriianhessentials.listeners;
 
-import me.adriianhdev.adriianhessentials.AdriianhEssentials;
-import me.adriianhdev.adriianhessentials.managers.FileManager;
+import me.adriianhdev.adriianhessentials.PluginCore;
+import me.adriianhdev.adriianhessentials.loaders.FilesLoader;
 import me.adriianhdev.adriianhessentials.utils.AdventureUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -9,18 +9,19 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class PlayerJoinListener implements Listener {
 
-    private final FileManager messages;
+    private final PluginCore pluginCore;
 
-    public PlayerJoinListener(AdriianhEssentials plugin) {
-        this.messages = plugin.getFiles().getMessages();
+    public PlayerJoinListener(PluginCore pluginCore) {
+        this.pluginCore = pluginCore;
     }
 
     @EventHandler
     private void playerJoinMessage(PlayerJoinEvent event) {
-        if (!messages.getBoolean("join-events.message.enable")) return;
+        FilesLoader messages = pluginCore.getFilesLoader();
+        if (!messages.getConfig().getBoolean("join-events.message.enable")) return;
 
         event.joinMessage(AdventureUtil.parse(
-                messages.getString("join-events.message.text")
+                messages.getConfig().getString("join-events.message.text")
                         .replaceAll("%player%", event.getPlayer().getName())
                         .replaceAll("%displayname%", event.getPlayer().displayName().toString())
         ));

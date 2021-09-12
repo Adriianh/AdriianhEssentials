@@ -1,8 +1,10 @@
 package me.adriianhdev.adriianhessentials.loaders;
 
 import me.adriianhdev.adriianhessentials.AdriianhEssentials;
+import me.adriianhdev.adriianhessentials.PluginCore;
 import me.adriianhdev.adriianhessentials.api.Loader;
 import me.adriianhdev.adriianhessentials.managers.FileManager;
+import org.bukkit.Bukkit;
 
 public class FilesLoader implements Loader {
 
@@ -11,13 +13,13 @@ public class FilesLoader implements Loader {
     private FileManager config;
     private FileManager messages;
 
-    public FilesLoader(AdriianhEssentials plugin) {
-        this.plugin = plugin;
+    public FilesLoader(PluginCore pluginCore){
+        this.plugin = pluginCore.getPlugin();
     }
 
     @Override
     public void load() {
-        plugin.getLogger().info("Registering files...");
+        Bukkit.getLogger().info("Registering files...");
         this.config = new FileManager(plugin, "config.yml");
         this.messages = new FileManager(plugin, "messages.yml");
     }

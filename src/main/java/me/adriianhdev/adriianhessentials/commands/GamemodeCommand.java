@@ -1,6 +1,8 @@
 package me.adriianhdev.adriianhessentials.commands;
 
 import me.adriianhdev.adriianhessentials.AdriianhEssentials;
+import me.adriianhdev.adriianhessentials.PluginCore;
+import me.adriianhdev.adriianhessentials.managers.FileManager;
 import me.adriianhdev.adriianhessentials.utils.AdventureUtil;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
@@ -16,10 +18,12 @@ import java.time.Duration;
 
 public class GamemodeCommand implements CommandExecutor {
 
-    private final FileConfiguration messages;
+    private final PluginCore pluginCore;
+    private final FileManager messages;
 
-    public GamemodeCommand(AdriianhEssentials plugin) {
-        this.messages = plugin.getConfig();
+    public GamemodeCommand(PluginCore pluginCore) {
+        this.pluginCore = pluginCore;
+        this.messages = pluginCore.getFilesLoader().getMessages();
     }
 
     @Override

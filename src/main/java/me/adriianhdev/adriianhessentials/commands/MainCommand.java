@@ -1,24 +1,28 @@
 package me.adriianhdev.adriianhessentials.commands;
 
-import me.adriianhdev.adriianhessentials.AdriianhEssentials;
+import me.adriianhdev.adriianhessentials.PluginCore;
+import me.adriianhdev.adriianhessentials.loaders.CommandsLoader;
 import me.adriianhdev.adriianhessentials.managers.FileManager;
 import me.adriianhdev.adriianhessentials.utils.AdventureUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.jetbrains.annotations.NotNull;
 
 public class MainCommand implements CommandExecutor {
 
+    private final PluginCore pluginCore;
     private final FileManager config;
     private final FileManager messages;
     private final PluginDescriptionFile description;
 
-    public MainCommand(AdriianhEssentials plugin) {
-        this.config = plugin.getFiles().getConfig();
-        this.messages = plugin.getFiles().getMessages();
-        this.description = plugin.getDescription();
+    public MainCommand(PluginCore pluginCore) {
+        this.pluginCore = pluginCore;
+        this.config = pluginCore.getFilesLoader().getConfig();
+        this.messages = pluginCore.getFilesLoader().getMessages();
+        this.description = pluginCore.getPlugin().getDescription();
     }
 
     @Override

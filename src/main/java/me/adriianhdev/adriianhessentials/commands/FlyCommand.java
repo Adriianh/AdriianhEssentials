@@ -1,8 +1,7 @@
 package me.adriianhdev.adriianhessentials.commands;
 
-import me.adriianhdev.adriianhessentials.AdriianhEssentials;
+import me.adriianhdev.adriianhessentials.PluginCore;
 import me.adriianhdev.adriianhessentials.managers.FileManager;
-import me.adriianhdev.adriianhessentials.utils.AdventureUtil;
 import me.adriianhdev.adriianhessentials.utils.SoundUtil;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
@@ -16,12 +15,14 @@ import java.time.Duration;
 
 public class FlyCommand implements CommandExecutor {
 
+    private final PluginCore pluginCore;
     private final FileManager messages;
 
-    public FlyCommand(AdriianhEssentials plugin) {
-        this.messages = plugin.getFiles().getMessages();
+    public FlyCommand(PluginCore pluginCore) {
+        this.pluginCore = pluginCore;
+        this.messages = pluginCore.getFilesLoader().getMessages();
     }
- 
+
     //Default valor of Sounds - Activated
     String activatedSound = "ENTITY.EXPERIENCE_ORB.PICKUP";
     float volume = 1f;
