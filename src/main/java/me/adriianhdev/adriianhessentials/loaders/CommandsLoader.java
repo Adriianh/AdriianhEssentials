@@ -22,6 +22,7 @@ public class CommandsLoader implements Loader {
                 new ExecutorBuilder("gamemode", new GamemodeCommand(pluginCore)),
                 new ExecutorBuilder("god", new GodModeCommand(pluginCore)),
                 new ExecutorBuilder("kill", new KillCommand(pluginCore)),
+                new ExecutorBuilder("time", new TimeCommand(pluginCore)),
                 new ExecutorBuilder("armorstand", new ArmorStandCommand(pluginCore))
         );
     }

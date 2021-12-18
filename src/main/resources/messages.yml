@@ -63,6 +63,18 @@ fly:
       activated: 1
       deactivated: 1
 
+#Time Commands
+time-change:
+  message: "&aThe time has been just changed."
+  error:
+    non-exist: "&cThis time doesn't exist."
+  title: "&a&lTIME CHANGED"
+  subtitle: "&7The time has been just changed."
+  times:
+    fadeIn: "500"
+    stay: "3000"
+    fadeOut: "1000"
+
 #Join and Quit Events
 join-events:
   message:

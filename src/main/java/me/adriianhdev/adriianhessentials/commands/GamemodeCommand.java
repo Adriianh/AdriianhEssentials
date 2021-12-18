@@ -47,24 +47,24 @@ public class GamemodeCommand implements CommandExecutor {
             case "0":
             case "s":
                 if (!(player.hasPermission("adriianhessentials.gamemode.creative") || player.hasPermission("adriianh.gamemode.*"))) {
-                    return true;
-                }
-                player.setGameMode(GameMode.SURVIVAL);
-                player.sendMessage(AdventureUtil.parse(
-                        messages.getString("gamemode.message")
 
-                ));
-                player.showTitle(Title.title(
-                        AdventureUtil.parse(
-                                messages.getString("gamemode.title")),
-                        AdventureUtil.parse(
-                                messages.getString("gamemode.subtitle")),
-                        Title.Times.of(
-                                Duration.ofMillis(messages.getInt("gamemode.times.fadeIn")),
-                                Duration.ofMillis(messages.getInt("gamemode.times.stay")),
-                                Duration.ofMillis(messages.getInt("gamemode.times.fadeOut"))
-                        )
-                ));
+                    player.setGameMode(GameMode.SURVIVAL);
+                    player.sendMessage(AdventureUtil.parse(
+                            messages.getString("gamemode.message")
+
+                    ));
+                    player.showTitle(Title.title(
+                            AdventureUtil.parse(
+                                    messages.getString("gamemode.title")),
+                            AdventureUtil.parse(
+                                    messages.getString("gamemode.subtitle")),
+                            Title.Times.of(
+                                    Duration.ofMillis(messages.getInt("gamemode.times.fadeIn")),
+                                    Duration.ofMillis(messages.getInt("gamemode.times.stay")),
+                                    Duration.ofMillis(messages.getInt("gamemode.times.fadeOut"))
+                            )
+                    ));
+                }
                 break;
             case "creative":
             case "c":

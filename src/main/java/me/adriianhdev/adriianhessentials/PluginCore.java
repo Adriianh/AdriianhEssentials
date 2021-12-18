@@ -31,8 +31,8 @@ public class PluginCore implements Core {
         Bukkit.getLogger().info("Registering events...");
     }
 
-    private void initLoaders(Loader...loaders){
-        for (Loader loader : loaders){
+    private void initLoaders(Loader... loaders) {
+        for (Loader loader : loaders) {
             loader.load();
         }
     }
@@ -44,4 +44,5 @@ public class PluginCore implements Core {
     public AdriianhEssentials getPlugin() {
         return plugin;
     }
+
 }
