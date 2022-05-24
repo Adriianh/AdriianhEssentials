@@ -98,9 +98,7 @@ public class FileManager extends YamlConfiguration {
 
     @Override
     public List<String> getStringList(String path) {
-        List<String> list = super.getStringList(path);
-        list.forEach(line -> ChatColor.translateAlternateColorCodes('&', line));
-        return list;
+        return super.getStringList(path).stream().map(line -> ChatColor.translateAlternateColorCodes('&', line)).collect(Collectors.toList());
     }
 
     public Component getComponent(String path) {
