@@ -18,6 +18,7 @@ public class ArmorStandListener implements Listener {
     float pitch = 1f;
 
     public ArmorStandListener(PluginCore pluginCore) {
+        //TODO use as source of messages
         FileManager messages = pluginCore.getFilesLoader().getMessages();
     }
 
